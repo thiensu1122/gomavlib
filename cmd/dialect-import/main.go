@@ -558,7 +558,7 @@ func run() error {
 	version := ""
 	processedDefs := make(map[string]struct{})
 	_, err := url.ParseRequestURI(cli.XML)
-	isRemote := (err == nil)
+	isRemote := false
 	defName := defAddrToName(cli.XML)
 
 	if _, err := os.Stat(defName); !os.IsNotExist(err) {
