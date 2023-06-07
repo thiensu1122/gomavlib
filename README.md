@@ -83,6 +83,10 @@ Standard dialects are provided in the `pkg/dialects/` folder, but it's also poss
 ```
 go install github.com/bluenviron/gomavlib/v2/cmd/dialect-import@latest
 dialect-import my_dialect.xml
+
+new command : 
+
+ go run dialect-import/*.go danny.xml
 ```
 
 ## Testing
