@@ -288,6 +288,12 @@ func processDefinition(
 
 	fmt.Fprintf(os.Stderr, "definition %s\n", defAddr)
 
+	path, err := os.Getwd()
+	if err != nil {
+		return nil, err
+	}
+	fmt.Fprintf(os.Stderr, "path %s\n", path)
+
 	content, err := getDefinition(isRemote, defAddr)
 	if err != nil {
 		return nil, err
@@ -510,7 +516,7 @@ func writeDialect(
 		return err
 	}
 
-	return os.WriteFile("dialect.go", buf.Bytes(), 0o644)
+	return os.WriteFile(defName+"/dialect.go", buf.Bytes(), 0o644)
 }
 
 func writeEnum(
@@ -528,7 +534,7 @@ func writeEnum(
 		return err
 	}
 
-	return os.WriteFile("enum_"+strings.ToLower(enum.Name)+".go", buf.Bytes(), 0o644)
+	return os.WriteFile(defName+"/enum_"+strings.ToLower(enum.Name)+".go", buf.Bytes(), 0o644)
 }
 
 func writeMessage(defName string, msg *outMessage, link bool) error {
@@ -542,7 +548,7 @@ func writeMessage(defName string, msg *outMessage, link bool) error {
 		return err
 	}
 
-	return os.WriteFile("message_"+strings.ToLower(msg.OrigName)+".go", buf.Bytes(), 0o644)
+	return os.WriteFile(defName+"/message_"+strings.ToLower(msg.OrigName)+".go", buf.Bytes(), 0o644)
 }
 
 var cli struct {
@@ -557,16 +563,16 @@ func run() error {
 
 	version := ""
 	processedDefs := make(map[string]struct{})
-	_, err := url.ParseRequestURI(cli.XML)
+	// _, err := url.ParseRequestURI(cli.XML)
 	isRemote := false
 	defName := defAddrToName(cli.XML)
+	println("Danny")
+	println(defName)
 
-	if _, err := os.Stat(defName); !os.IsNotExist(err) {
-		return fmt.Errorf("directory '%s' already exists", defName)
+	if _, err := os.Stat(defName); os.IsNotExist(err) {
+		os.Mkdir(defName, 0o755)
+		os.Chdir(defName)
 	}
-
-	os.Mkdir(defName, 0o755)
-	os.Chdir(defName)
 
 	// parse all definitions recursively
 	outDefs, err := processDefinition(&version, processedDefs, isRemote, cli.XML)
@@ -626,6 +632,7 @@ func run() error {
 }
 
 func main() {
+	println("Hello")
 	err := run()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "ERR: %s\n", err)

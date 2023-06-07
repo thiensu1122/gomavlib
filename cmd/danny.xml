@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<mavlink>
+	<include>common.xml</include>
+	<!-- NOTE: If the included file already contains a version tag, remove the version tag here, else uncomment to enable. -->
+	<!-- <version>6</version> -->
+	<dialect>9</dialect>
+	<enums>
+		<!-- Enums are defined here (optional) -->
+		<enum name="MAV_COMMAND_TYPE">
+			<description>Micro air vehicle / autopilot classes. This identifies the individual model.</description>
+			<entry value="0" name="MAV_AUTOPILOT_GENERIC">
+				<description>Generic autopilot, full support for everything</description>
+			</entry>
+		</enum>
+	</enums>
+	<messages>
+		<!-- Messages are defined here (optional) -->
+		<message id="12921" name="DRONE_STATUS">
+			<description>Every done send this to GCS every second.</description>
+			<field type="uint8_t" name="command_type" enum="MAV_COMMAND_TYPE">command type</field>
+			<field type="int16_t" name="drone_id"> drone id </field>
+			<field type="int32_t" name="leading_lat"> leading latitude </field>
+			<field type="int32_t" name="leading_lon"> leading longtitude </field>
+			<field type="uint8_t" name="rtk_fix"> rtk fix </field>
+			<field type="uint8_t" name="rtk_sat_count"> sat count </field>
+			<field type="int32_t" name="rtk_tow"> tow </field>
+			<field type="int32_t" name="rtk_lat"> drone latitude </field>
+			<field type="int32_t" name="rtk_lon"> drone longtitude </field>
+			<field type="float" name="rtk_alt"> drone altitude </field>
+			<field type="float" name="rtk_heading"> drone heading </field>
+			<field type="uint8_t" name="battery"> current drone battery </field>
+			<field type="uint8_t" name="arm"> is drone arm </field>
+			<field type="uint8_t" name="mode"> current drone mode </field>
+			<field type="uint8_t" name="land"> is drone landed </field>
+		</message>
+	</messages>
+</mavlink>
