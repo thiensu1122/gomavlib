@@ -17,7 +17,6 @@
 		<!-- Messages are defined here (optional) -->
 		<message id="12921" name="DRONE_STATUS">
 			<description>Every done send this to GCS every second.</description>
-			<field type="uint8_t" name="command_type" enum="MAV_COMMAND_TYPE">command type</field>
 			<field type="int16_t" name="drone_id"> drone id </field>
 			<field type="int32_t" name="leading_lat"> leading latitude </field>
 			<field type="int32_t" name="leading_lon"> leading longtitude </field>

@@ -3,8 +3,6 @@
 package danny
 // Every done send this to GCS every second.
 type MessageDroneStatus struct {
-    // command type
-    CommandType MAV_COMMAND_TYPE `mavenum:"uint8"`
     // drone id
     DroneId int16
     // leading latitude

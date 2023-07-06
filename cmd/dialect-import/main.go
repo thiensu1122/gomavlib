@@ -566,8 +566,6 @@ func run() error {
 	// _, err := url.ParseRequestURI(cli.XML)
 	isRemote := false
 	defName := defAddrToName(cli.XML)
-	println("Danny")
-	println(defName)
 
 	if _, err := os.Stat(defName); os.IsNotExist(err) {
 		os.Mkdir(defName, 0o755)
@@ -607,13 +605,13 @@ func run() error {
 		}
 	}
 
-	err = writeDialect(defName, version, outDefs, enums)
+	err = writeDialect("../../pkg/dialects/"+defName, version, outDefs, enums)
 	if err != nil {
 		return err
 	}
 
 	for _, enum := range enums {
-		err := writeEnum(defName, enum, cli.Link)
+		err := writeEnum("../../pkg/dialects/"+defName, enum, cli.Link)
 		if err != nil {
 			return err
 		}
@@ -621,7 +619,7 @@ func run() error {
 
 	for _, def := range outDefs {
 		for _, msg := range def.Messages {
-			err := writeMessage(defName, msg, cli.Link)
+			err := writeMessage("../../pkg/dialects/"+defName, msg, cli.Link)
 			if err != nil {
 				return err
 			}
@@ -632,7 +630,6 @@ func run() error {
 }
 
 func main() {
-	println("Hello")
 	err := run()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "ERR: %s\n", err)
