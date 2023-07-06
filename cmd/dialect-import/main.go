@@ -516,7 +516,7 @@ func writeDialect(
 		return err
 	}
 
-	return os.WriteFile(defName+"/dialect.go", buf.Bytes(), 0o644)
+	return os.WriteFile("../../pkg/dialects/"+defName+"/dialect.go", buf.Bytes(), 0o644)
 }
 
 func writeEnum(
@@ -534,7 +534,7 @@ func writeEnum(
 		return err
 	}
 
-	return os.WriteFile(defName+"/enum_"+strings.ToLower(enum.Name)+".go", buf.Bytes(), 0o644)
+	return os.WriteFile("../../pkg/dialects/"+defName+"/enum_"+strings.ToLower(enum.Name)+".go", buf.Bytes(), 0o644)
 }
 
 func writeMessage(defName string, msg *outMessage, link bool) error {
@@ -548,7 +548,7 @@ func writeMessage(defName string, msg *outMessage, link bool) error {
 		return err
 	}
 
-	return os.WriteFile(defName+"/message_"+strings.ToLower(msg.OrigName)+".go", buf.Bytes(), 0o644)
+	return os.WriteFile("../../pkg/dialects/"+defName+"/message_"+strings.ToLower(msg.OrigName)+".go", buf.Bytes(), 0o644)
 }
 
 var cli struct {
@@ -605,13 +605,13 @@ func run() error {
 		}
 	}
 
-	err = writeDialect("../../pkg/dialects/"+defName, version, outDefs, enums)
+	err = writeDialect(defName, version, outDefs, enums)
 	if err != nil {
 		return err
 	}
 
 	for _, enum := range enums {
-		err := writeEnum("../../pkg/dialects/"+defName, enum, cli.Link)
+		err := writeEnum(defName, enum, cli.Link)
 		if err != nil {
 			return err
 		}
@@ -619,7 +619,7 @@ func run() error {
 
 	for _, def := range outDefs {
 		for _, msg := range def.Messages {
-			err := writeMessage("../../pkg/dialects/"+defName, msg, cli.Link)
+			err := writeMessage(defName, msg, cli.Link)
 			if err != nil {
 				return err
 			}

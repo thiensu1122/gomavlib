@@ -7,10 +7,10 @@
 	<enums>
 		<!-- Enums are defined here (optional) -->
 		<enum name="MAV_COMMAND_TYPE">
-			<description>Micro air vehicle / autopilot classes. This identifies the individual model.</description>
+			<!-- <description>Micro air vehicle / autopilot classes. This identifies the individual model.</description>
 			<entry value="0" name="MAV_AUTOPILOT_GENERIC">
 				<description>Generic autopilot, full support for everything</description>
-			</entry>
+			</entry> -->
 		</enum>
 	</enums>
 	<messages>
