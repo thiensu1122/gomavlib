@@ -15,7 +15,7 @@
 	</enums>
 	<messages>
 		<!-- Messages are defined here (optional) -->
-		<message id="12921" name="DRONE_STATUS">
+		<message id="12921" name="VD_DRONE_STATUS">
 			<description>Every done send this to GCS every second.</description>
 			<field type="uint16_t" name="drone_id"> drone id </field>
 			<field type="int32_t" name="leading_lat"> leading latitude </field>
@@ -31,6 +31,19 @@
 			<field type="uint8_t" name="arm"> is drone arm </field>
 			<field type="uint8_t" name="mode"> current drone mode </field>
 			<field type="uint8_t" name="land"> is drone landed </field>
+		</message>
+		<message id="12922" name="VD_COMMAND_LONG">
+		<description>Send a command with up to seven parameters to the MAV. COMMAND_INT is generally preferred when sending MAV_CMD commands that include positional information; it offers higher precision and allows the MAV_FRAME to be specified (which may otherwise be ambiguous, particularly for altitude). The command microservice is documented at https://mavlink.io/en/services/command.html</description>
+			<field type="uint16_t" name="drone_id"> drone id </field>
+			<field type="uint16_t" name="command" enum="MAV_CMD">Command ID (of command to send).</field>
+			<field type="uint8_t" name="confirmation">0: First transmission of this command. 1-255: Confirmation transmissions (e.g. for kill command)</field>
+			<field type="float" name="param1" invalid="NaN">Parameter 1 (for the specific command).</field>
+			<field type="float" name="param2" invalid="NaN">Parameter 2 (for the specific command).</field>
+			<field type="float" name="param3" invalid="NaN">Parameter 3 (for the specific command).</field>
+			<field type="float" name="param4" invalid="NaN">Parameter 4 (for the specific command).</field>
+			<field type="float" name="param5" invalid="NaN">Parameter 5 (for the specific command).</field>
+			<field type="float" name="param6" invalid="NaN">Parameter 6 (for the specific command).</field>
+			<field type="float" name="param7" invalid="NaN">Parameter 7 (for the specific command).</field>
 		</message>
 	</messages>
 </mavlink>
